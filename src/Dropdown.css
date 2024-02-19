@@ -25,17 +25,17 @@
     border-radius: 0.5em;
     font-size: 22px;
 }
-.dropdown-button > p, .dropdown-button > img {
+.dropdown-button > p, .dropdown-button > svg {
     margin-inline: 1em;
 }
 
-.dropdown-button img {
+.dropdown-button svg {
     width: 2em;
     height: 4em;
     transition: transform 0.3s ease; ;
 }
 
-.dropdown-button:focus img {
+.dropdown-button:focus svg {
     transform: rotate(180deg);
 }
 .dropdown-button:hover {
