@@ -28,6 +28,7 @@
     font-size: 22px;
 }
 .animate-height{
+    overflow: hidden;
     transition: height 0.5s ease;
 }
 .dropdown-button > p, .dropdown-button > svg {
@@ -50,7 +51,7 @@
 
 .dropdown-content {
     width: 100%;
-
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
@@ -62,7 +63,6 @@
     border: 1px solid #fff;
     border-radius: 0.5em;
     margin: 0.5em;
-    cursor: pointer;
     grid-column: span 2;
     position: relative;
     display: flex;
@@ -117,10 +117,11 @@
     }
     
     .menu-primary-exit {
+    overflow: hidden;
     position: relative;
     }
     
-    .menu-primary-exit-active {
+    .menu-primary-exit    {
       transform: translateX(-110%);
       transition: all 500ms ease;
     }
@@ -128,14 +129,15 @@
     .menu-secondary-enter {
       transform: translateX(110%);
     }
-    .menu-secondary-enter-active {
+    .menu-secondary-enter-done {
       transform: translateX(0%);
       transition: all 500ms ease;
     }
     .menu-secondary-exit {
-    
+        transform: translateX(110%);
+      transition: all 500ms ease;
     }
-    .menu-secondary-exit-active {
+    .menu-secondary-exit-done {
       transform: translateX(110%);
       transition: all 500ms ease;
     }
@@ -146,9 +148,11 @@
 
     .dropdown-list-item{
         grid-template-columns: span 2;
+        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 1em;
         border-bottom: 1px solid #ffffff00;
     }
+    
