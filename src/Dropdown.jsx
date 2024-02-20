@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './Dropdown.css';
 
@@ -7,6 +7,10 @@ function Dropdown(props) {
     const [isActive, setIsActive] = useState(false); // Controls if the dropdown is active
     const [menuHeight, setMenuHeight] = useState(null); // Controls the height of the dropdown
     
+    const calcHeight = (el) => {
+        const height = el.offsetHeight;
+        setMenuHeight(height);
+    };
 
     const handleMenuChange = (menuName) => {
         setActiveMenu(menuName);
@@ -26,11 +30,12 @@ function Dropdown(props) {
                 </svg>
             </div>
             {isActive && (
-                <>
+                <div className='animate-height' style={{height:menuHeight}}>
                     <CSSTransition
                         in={activeMenu === 'main'}
                         unmountOnExit
                         timeout={500}
+                        onEnter={calcHeight}
                         classNames="menu-primary">
                         <form className="dropdown-content" onSubmit={handleSubmit}>
                             <div className="dropdown-form-item">
@@ -62,6 +67,7 @@ function Dropdown(props) {
                         in={activeMenu === 'list'}
                         unmountOnExit
                         timeout={500}
+                        onEnter={calcHeight}
                         classNames="menu-secondary">
                         <div className='dropdown-content list'>
                             <div className='dropdown-list-item' >
@@ -77,7 +83,7 @@ function Dropdown(props) {
                             </div>
                         </div>
                     </CSSTransition>
-                </>
+                </div>
             )}
         </div>
     );
