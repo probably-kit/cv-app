@@ -6,6 +6,7 @@
 
 
 .dropdown {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,6 +16,7 @@
     margin: 1em;
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    transition: height 0.5s ease;
 }
 
 .dropdown-button {
@@ -95,7 +97,55 @@
 
 .button-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 1em;
     
 }
 
+.menu-primary-enter {
+    position: relative;
+    transform: translateX(-110%);
+    }
+    
+    .menu-primary-enter-active{
+      transform: translateX(0%);
+      transition: all 500ms ease;
+    }
+    
+    .menu-primary-exit {
+    position: relative;
+    }
+    
+    .menu-primary-exit-active {
+      transform: translateX(-110%);
+      transition: all 500ms ease;
+    }
+    
+    .menu-secondary-enter {
+      transform: translateX(110%);
+    }
+    .menu-secondary-enter-active {
+      transform: translateX(0%);
+      transition: all 500ms ease;
+    }
+    .menu-secondary-exit {
+    
+    }
+    .menu-secondary-exit-active {
+      transform: translateX(110%);
+      transition: all 500ms ease;
+    }
+
+    .list{
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .dropdown-list-item{
+        grid-template-columns: span 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        border-bottom: 1px solid #ffffff00;
+    }
