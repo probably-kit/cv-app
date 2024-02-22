@@ -4,6 +4,7 @@ import './Dropdown.css';
 import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
 import { ReactComponent as EyeOpen } from './icons/eye-open.svg';
 import { ReactComponent as EyeClosed } from './icons/eye-closed.svg';
+import PropTypes from 'prop-types';
 
 function IconSwitcher() {
     const [currentIcon, setCurrentIcon] = useState('iconOpen');
@@ -19,7 +20,7 @@ function IconSwitcher() {
     );
 }
 
-import PropTypes from 'prop-types';
+
 
 function DropdownFormItem(props) {
 
@@ -43,20 +44,22 @@ DropdownFormItem.propTypes = {
     containerClassName: PropTypes.string
 };
 
-function DropdownListItem(props) {
+function DropdownListItem({ item, onEdit }) {
     return (
-        <div className='dropdown-list-item'>
-            <p>Title</p>
+        <div onClick={onEdit} className="dropdown-list-item">
+            <p>{item.firstLabel}</p> {/* Displaying the firstLabel as an example */}
             <IconSwitcher />
         </div>
-    )
+    );
 }
 
 
 function Dropdown(props) {
-    const [activeMenu, setActiveMenu] = useState('main'); // Controls which menu is active
-    const [isActive, setIsActive] = useState(false); // Controls if the dropdown is active
-    const [menuHeight, setMenuHeight] = useState(null); // Controls the height of the dropdown
+    const [activeMenu, setActiveMenu] = useState('main');
+    const [isActive, setIsActive] = useState(false);
+    const [menuHeight, setMenuHeight] = useState(null);
+    const [formData, setFormData] = useState([]);
+    const [editingItem, setEditingItem] = useState(null);
 
     const calcHeight = (el) => {
         const height = el.offsetHeight;
@@ -69,7 +72,37 @@ function Dropdown(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const newEntry = {
+            firstLabel: event.target.elements[props.firstFormLabel].value,
+            secondLabel: event.target.elements[props.secondFormLabel].value,
+        };
+
+        if (editingItem) {
+            // Update logic
+            const updatedFormData = formData.map(item =>
+                item === editingItem ? newEntry : item
+            );
+            setFormData(updatedFormData);
+            setEditingItem(null); // Reset editing state
+        } else {
+            // Add logic
+            setFormData([...formData, newEntry]);
+        }
+
         handleMenuChange('list'); // Switch to 'list' menu after form submission
+    };
+
+    const handleEditItem = (item) => {
+        setEditingItem(item); // Set the item to be edited
+        setActiveMenu('main'); // Switch back to the form
+    };
+
+    const handleDeleteItem = () => {
+        if (editingItem) {
+            setFormData(formData.filter(item => item.firstLabel !== editingItem.firstLabel));
+            setEditingItem(null); // Reset the editing state
+            setActiveMenu('list'); // Optionally switch back to the list view
+        }
     };
 
     return (
@@ -79,26 +112,28 @@ function Dropdown(props) {
                 <ArrowIcon style={{ transform: isActive ? 'rotate(180deg)' : 'rotate(0deg)' }} />
             </div>
             {isActive && (
-                <div className='animate-height' style={{ height: menuHeight }}>
+                <div className="animate-height" style={{ height: menuHeight }}>
                     <CSSTransition
                         in={activeMenu === 'main'}
                         unmountOnExit
                         timeout={500}
                         onEnter={calcHeight}
                         classNames="menu-primary">
-                        <form className="dropdown-content" onSubmit={handleSubmit}>
-                            <DropdownFormItem inputTitle={props.firstFormLabel} />
-                            <DropdownFormItem inputTitle={props.secondFormLabel} />
-                            <DropdownFormItem inputTitle="Start date" type="date" containerClassName="dropdown-form-item unspan"/>
-                            <DropdownFormItem inputTitle="End date" type="date" containerClassName="dropdown-form-item unspan"/>
-                            <div className="dropdown-form-item">
-                                <button type="submit" className="primary">Save</button>
-                                <div className='button-container'>
-                                    <button type="button" className="primary" onClick={() => setIsActive(false)}>Cancel</button>
-                                    <button type="button" className="primary" onClick={() => {/* Implement delete logic */ }}>Delete</button>
+                        <div className="dropdown-content">
+                            <form className="grid-container" onSubmit={handleSubmit}>
+                                <DropdownFormItem inputTitle={props.firstFormLabel} defaultValue={editingItem ? editingItem.firstLabel : ''} />
+                                <DropdownFormItem inputTitle={props.secondFormLabel} defaultValue={editingItem ? editingItem.secondLabel : ''} />
+                                <DropdownFormItem inputTitle="Start date" type="date" containerClassName="dropdown-form-item unspan" />
+                                <DropdownFormItem inputTitle="End date" type="date" containerClassName="dropdown-form-item unspan" />
+                                <div className="dropdown-form-item">
+                                    <button type="submit" className="primary">Save</button>
+                                    {editingItem && (
+                                        <button type="button" className="danger" onClick={handleDeleteItem}>Delete</button>
+                                    )}
+                                    <button type="button" className="secondary" onClick={() => setIsActive(false)}>Cancel</button>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </CSSTransition>
                     <CSSTransition
                         in={activeMenu === 'list'}
@@ -106,12 +141,11 @@ function Dropdown(props) {
                         timeout={500}
                         onEnter={calcHeight}
                         classNames="menu-secondary">
-                        <div className='dropdown-content'>
-                        <DropdownListItem />
-                        <DropdownListItem />
-                        <DropdownListItem />
-                        <DropdownListItem />
-                            <div className='dropdown-list-item'>
+                        <div className="dropdown-content">
+                            {formData.map((item, index) => (
+                                <DropdownListItem key={index} item={item} onEdit={() => handleEditItem(item)} />
+                            ))}
+                            <div className="dropdown-list-item">
                                 <button onClick={() => handleMenuChange('main')}>+ Add</button>
                             </div>
                         </div>
@@ -121,5 +155,11 @@ function Dropdown(props) {
         </div>
     );
 }
+
+Dropdown.propTypes = {
+    title: PropTypes.string.isRequired,
+    firstFormLabel: PropTypes.string.isRequired,
+    secondFormLabel: PropTypes.string.isRequired,
+};
 
 export default Dropdown;
