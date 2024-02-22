@@ -1,30 +1,63 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './Dropdown.css';
- import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
- import { ReactComponent as EyeOpen } from './icons/eye-open.svg';
- import { ReactComponent as EyeClosed } from './icons/eye-closed.svg';
+import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
+import { ReactComponent as EyeOpen } from './icons/eye-open.svg';
+import { ReactComponent as EyeClosed } from './icons/eye-closed.svg';
 
- function IconSwitcher() {
+function IconSwitcher() {
     const [currentIcon, setCurrentIcon] = useState('iconOpen');
-  
+
     const toggleIcon = () => {
-      setCurrentIcon(currentIcon === 'iconOpen' ? 'iconClosed' : 'iconOpen');
+        setCurrentIcon(currentIcon === 'iconOpen' ? 'iconClosed' : 'iconOpen');
     };
-  
+
     return (
-      <div onClick={toggleIcon}>
-        {currentIcon === 'iconOpen' ? <EyeOpen /> : <EyeClosed />}
-      </div>
+        <div style={{ cursor: 'pointer' }} onClick={toggleIcon}>
+            {currentIcon === 'iconOpen' ? <EyeOpen /> : <EyeClosed />}
+        </div>
     );
-  }
+}
+
+import PropTypes from 'prop-types';
+
+function DropdownFormItem(props) {
+
+
+
+    return (
+        <div className={props.containerClassName}>
+            <input type={props.type} id={props.inputTitle} className="form-control" placeholder="" /*required*/ />
+            <label htmlFor={props.inputTitle} className="form-label">{props.inputTitle}</label>
+        </div>
+    )
+}
+DropdownFormItem.defaultProps = {
+    type: "text",
+    inputTitle: "School",
+    containerClassName: "dropdown-form-item"
+}
+DropdownFormItem.propTypes = {
+    inputTitle: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    containerClassName: PropTypes.string
+};
+
+function DropdownListItem(props) {
+    return (
+        <div className='dropdown-list-item'>
+            <p>Title</p>
+            <IconSwitcher />
+        </div>
+    )
+}
 
 
 function Dropdown(props) {
     const [activeMenu, setActiveMenu] = useState('main'); // Controls which menu is active
     const [isActive, setIsActive] = useState(false); // Controls if the dropdown is active
     const [menuHeight, setMenuHeight] = useState(null); // Controls the height of the dropdown
-    
+
     const calcHeight = (el) => {
         const height = el.offsetHeight;
         setMenuHeight(height);
@@ -43,10 +76,10 @@ function Dropdown(props) {
         <div className="dropdown">
             <div className="dropdown-button" onClick={() => setIsActive(!isActive)}>
                 <p>{props.title}</p>
-                 <ArrowIcon style={{ transform: isActive ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                <ArrowIcon style={{ transform: isActive ? 'rotate(180deg)' : 'rotate(0deg)' }} />
             </div>
             {isActive && (
-                <div className='animate-height' style={{height:menuHeight}}>
+                <div className='animate-height' style={{ height: menuHeight }}>
                     <CSSTransition
                         in={activeMenu === 'main'}
                         unmountOnExit
@@ -54,22 +87,10 @@ function Dropdown(props) {
                         onEnter={calcHeight}
                         classNames="menu-primary">
                         <form className="dropdown-content" onSubmit={handleSubmit}>
-                            <div className="dropdown-form-item">
-                                <input type="text" id="school" className="form-control" placeholder=" " /*required*/ />
-                                <label htmlFor="school" className="form-label">{props.firstFormLabel}</label>
-                            </div>
-                            <div className="dropdown-form-item">
-                                <input type="text" id="degree" className="form-control" placeholder=" " /*required*/ />
-                                <label htmlFor="degree" className="form-label">{props.secondFormLabel}</label>
-                            </div>
-                            <div className="dropdown-form-item unspan">
-                                <input type="date" id="start-date" className="form-control" placeholder="" /*required*/ />
-                                <label htmlFor="start-date" className="form-label">Start date</label>
-                            </div>
-                            <div className="dropdown-form-item unspan">
-                                <input type="date" id="end-date" className="form-control" placeholder="" /*required*/ />
-                                <label htmlFor="end-date" className="form-label">End date</label>
-                            </div>
+                            <DropdownFormItem inputTitle={props.firstFormLabel} />
+                            <DropdownFormItem inputTitle={props.secondFormLabel} />
+                            <DropdownFormItem inputTitle="Start date" type="date" containerClassName="dropdown-form-item unspan"/>
+                            <DropdownFormItem inputTitle="End date" type="date" containerClassName="dropdown-form-item unspan"/>
                             <div className="dropdown-form-item">
                                 <button type="submit" className="primary">Save</button>
                                 <div className='button-container'>
@@ -86,11 +107,10 @@ function Dropdown(props) {
                         onEnter={calcHeight}
                         classNames="menu-secondary">
                         <div className='dropdown-content'>
-                            <div className='dropdown-list-item' >
-                            <p>Title</p>
-                            <IconSwitcher />
-                            </div>
-                            
+                        <DropdownListItem />
+                        <DropdownListItem />
+                        <DropdownListItem />
+                        <DropdownListItem />
                             <div className='dropdown-list-item'>
                                 <button onClick={() => handleMenuChange('main')}>+ Add</button>
                             </div>

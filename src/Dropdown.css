@@ -121,23 +121,25 @@
     position: relative;
     }
     
-    .menu-primary-exit    {
+    .menu-primary-exit-active    {
       transform: translateX(-110%);
-      transition: all 500ms ease;
+      transition: all 500ms ease;   
     }
     
     .menu-secondary-enter {
       transform: translateX(110%);
     }
     .menu-secondary-enter-done {
+     
       transform: translateX(0%);
       transition: all 500ms ease;
     }
-    .menu-secondary-exit {
+    /* .menu-secondary-exit {
         transform: translateX(110%);
       transition: all 500ms ease;
-    }
-    .menu-secondary-exit-done {
+    } */
+    .menu-secondary-exit-active {
+        
       transform: translateX(110%);
       transition: all 500ms ease;
     }
