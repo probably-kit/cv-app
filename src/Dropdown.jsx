@@ -46,8 +46,8 @@ DropdownFormItem.propTypes = {
 
 function DropdownListItem({ item, onEdit }) {
     return (
-        <div onClick={onEdit} className="dropdown-list-item">
-            <p>{item.firstLabel}</p> {/* Displaying the firstLabel as an example */}
+        <div  className="dropdown-list-item">
+            <p onClick={onEdit}>{item.firstLabel}</p> {/* Displaying the firstLabel as an example */}
             <IconSwitcher />
         </div>
     );
@@ -130,7 +130,7 @@ function Dropdown(props) {
                                     {editingItem && (
                                         <button type="button" className="danger" onClick={handleDeleteItem}>Delete</button>
                                     )}
-                                    <button type="button" className="secondary" onClick={() => setIsActive(false)}>Cancel</button>
+                                    <button type="button" className="secondary" onClick={() => handleMenuChange('list')}>Cancel</button>
                                 </div>
                             </form>
                         </div>

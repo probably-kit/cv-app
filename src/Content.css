@@ -1,0 +1,14 @@
+.content{
+  width: 90vh;
+  border: 1px solid black;
+}
+
+.personal-info{
+
+  background-color: #d8d8d8;
+}
+
+.education > h2, .expirience > h2{
+  text-align: center;
+  background-color: #fae8e8;
+}
