@@ -84,9 +84,6 @@
     justify-content: space-between;
 }
 
-.unspan {
-    grid-column: span 1;
-}
 
 
 .form-control {
@@ -179,3 +176,4 @@
     padding: 1em;
     border-bottom: 1px solid #ffffff00;
 }
+

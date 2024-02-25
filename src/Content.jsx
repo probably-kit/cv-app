@@ -1,28 +1,45 @@
-import './Content.css'
-function Content() {
+import React from 'react';
+import './Content.css';
+
+function Content({ personalInfo, education, experience }) {
   return (
     <div>
       <h1>Content</h1>
       <div className='content'>
         <div className="personal-info">
-          <p>John Doe</p>
-          <p>Phone: 123456789</p>
-          <p>Email:</p>
-          <p>Links</p>
+          {personalInfo.map((item, index) => (
+            <div key={index}>
+              <h2>{item.Name}</h2>
+              <p>{item.Phone}</p>
+              <p>{item.Email}</p>
+              <p>{item.Links}</p>
+            </div>
+          ))}
         </div>
-        <div className="education" >
-          <h2>Education</h2>
-          <p>University of Life</p>
-          <p>2010-2014</p>
+        <div className="education">
+          {education.map((item, index) => (
+            <div key={index}>
+              <h2>{item.School || item.name}</h2> {/* Adjust based on your inputTitle */}
+              <p>{item.Degree}</p>
+              <p>Start Date: {item["Start date"]}</p> {/* Adjust keys as per form inputs */}
+              <p>End Date: {item["End date"]}</p>
+            </div>
+          ))}
         </div>
-        <div className="expirience">
-          <h2>Expirience</h2>
-          <p>Company Name</p>
-          <p>Position Title</p>
+        <div className="experience">
+          {experience.map((item, index) => (
+            <div key={index}>
+              <h2>{item['Company Name']}</h2>
+              <p>{item['Position Title']}</p>
+              <p>{item.Description}</p>
+              <p>Start Date: {item["Start date"]}</p>
+              <p>End Date: {item["End date"]}</p>
+            </div>
+          ))}
         </div>
-
       </div>
     </div>
-  )
+  );
 }
+
 export default Content;
