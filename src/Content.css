@@ -1,7 +1,8 @@
 .content{
-  width: 90vh;
+  width: 77em;
   border: 1px solid black;
   border-radius: 15px;
+  position: absolute;
 }
 
 .personal-info{
@@ -10,7 +11,49 @@
   background-color: #d8d8d8;
 }
 
-.education > h2, .expirience > h2{
+
+.name{
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.education > h2, .experience > h2{
   text-align: center;
   background-color: #fae8e8;
 } 
+
+.personal-info-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4em;
+  padding-bottom: 4em;
+  padding-top: 2em ;
+
+}
+.personal-info-items{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10em;
+}
+
+
+.experience-container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5em;
+}
+
+.experience-item{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1em;
+  margin-block: 2em;
+}
+

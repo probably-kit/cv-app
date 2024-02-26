@@ -57,6 +57,9 @@
     background-color: #f0f0f0;
 }
 
+button{
+    margin-bottom: 2em;
+}
 
 .dropdown-content {
     width: 100%;

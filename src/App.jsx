@@ -34,7 +34,6 @@ function App() {
       <div className='main-container'>
         <div className='form-container'>
         <h1>CV creator</h1>
-        
           <Dropdown onFormDataChange={data => handleFormDataChange('personalInfo', data)} title="Personal Information">
             <DropdownFormItem inputTitle='Name' />
             <DropdownFormItem inputTitle="Phone" />

@@ -1,5 +1,4 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -7,10 +6,14 @@
 
 .main-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
   gap: 4rem;
+  position: absolute;
+  left: 2em;
+  top: 2em
 }
 .unspan {
   grid-column: span 1;
 }
+
