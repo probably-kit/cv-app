@@ -9,7 +9,9 @@ function Content({ personalInfo, education, experience }) {
         <div className="personal-info">
           {personalInfo.map((item, index) => (
             <div className='personal-info-container' key={index}>
-              <h2 className='name'>{item.Name}</h2>
+              <p className='name'>{item.Name}</p> 
+              <p> {item.Surname}</p>
+              <p>{item.Position}</p>
               <div className='personal-info-items'>
                 <p>{item.Phone}</p>
                 <p>{item.Email}</p>

@@ -36,6 +36,8 @@ function App() {
         <h1>CV creator</h1>
           <Dropdown onFormDataChange={data => handleFormDataChange('personalInfo', data)} title="Personal Information">
             <DropdownFormItem inputTitle='Name' />
+            <DropdownFormItem inputTitle='Surname' />
+            <DropdownFormItem inputTitle='Position' />
             <DropdownFormItem inputTitle="Phone" />
             <DropdownFormItem inputTitle="Email" />
             <DropdownFormItem inputTitle="Links" />
