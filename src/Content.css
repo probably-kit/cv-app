@@ -1,7 +1,56 @@
-.content{
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.content {
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adaptive columns */
+  gap: 20px; /* Space between grid items */
   width: 77em;
   border: 1px solid black;
   border-radius: 15px;
-  position: absolute;
+  padding: 20px; /* Padding inside the content area */
 }
 
+.container {
+  display: grid;
+  grid-template-rows: auto; /* Rows adjust to content */
+  gap: 10px; /* Space between grid items */
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
+  gap: 20px; /* Space between grid items */
+}
+
+.personal-info, .line, .skills, .experience {
+  grid-column: span 2; /* These items span across all columns */
+}
+
+.name, .surname, .position {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.surname {
+  font-size: 52px;
+}
+
+.position {
+  font-size: 60px;
+}
+
+.line {
+  grid-column: span 2; /* Ensure lines span across all available columns */
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  margin: 20px 0;
+}
+
+p {
+  text-align: start;
+}
