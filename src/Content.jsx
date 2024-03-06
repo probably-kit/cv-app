@@ -34,7 +34,7 @@ function Content({ personalInfo, education, experience }) {
             <p className='title'>Summary</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quod eum officia possimus repellat blanditiis incidunt illum sed minus ipsam beatae iure culpa fugit, earum quidem numquam hic reiciendis quia similique dignissimos esse accusamus, alias aliquam? Culpa, obcaecati.</p>
           </div>       
-            <div className="content-item">
+            <div className="content-item span-1">
               <p className='title'>SKILLS</p>
               <p>HTML</p>
               <p>CSS</p>
