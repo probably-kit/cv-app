@@ -28,7 +28,8 @@ function Content({ personalInfo, education, experience }) {
             <p>+48516557455</p>
             <p>mikita.lohinau@gmail.com</p>
             <p>Gdansk, Poland</p>
-            <p>Github</p>
+            <a href='https://github.com/probably-kit'>Github</a>
+            <a href='https://www.linkedin.com/in/mikita-lohinau-0a5239235/'>LinkedIn</a>
           </div>
           <div className='content-item span-3'>
             <p className='title'>Summary</p>

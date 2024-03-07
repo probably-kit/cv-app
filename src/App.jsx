@@ -56,7 +56,7 @@ function App() {
             <DropdownFormItem inputTitle="End date" type="date" containerClassName="dropdown-form-item unspan" />
           </Dropdown>
         </div>
-        <Content  {...formData} isVisible={true} />
+        <Content className='content'  {...formData} isVisible={true} />
       </div>
       
     </>

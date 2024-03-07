@@ -17,3 +17,7 @@
   grid-column: span 1;
 }
 
+.content{
+  width: 95%;
+  margin-bottom: 3em;
+}
